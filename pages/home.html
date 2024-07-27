@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="path/to/output.css">
-  <title>Social Media App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home</title>
+    <style>
+      .custom-user-icon {
+          color: white; /* User color */
+          background-color: orange; /* Circle color */
+          border-radius: 50%;
+          padding: 7px;
+          font-size: 0.7rem; 
+      }
+
+  </style>
 </head>
-<body class="bg-gray-100 text-center">
-  <h1 class="text-4xl font-bold text-blue-500">Hello, Tailwind CSS!</h1>
+<body class="bg-gray-100">
+  <nav class="bg-gray-200 shadow-md py-4">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <div class="flex space-x-8">
+        <a href="#" class="text-xl font-semibold text-indigo-700 hover:text-indigo-900 transition duration-300">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="#" class="text-xl font-semibold text-indigo-700 hover:text-indigo-900 transition duration-300">
+          <i class="fas fa-user"></i> Profile
+        </a>
+      </div>
+      <div class="space-y-3"><div class="font-bold text-xl text-center">username</div><button id="signin" type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+        Log out
+      </button></div>
+      
+    </div>
+  </nav>
+  <div class="container flex justify-center items-center flex-col">
+    <div class="h-96 w-3/5 bg-gray-200 mt-9 pace-y-2 ">
+<div class=" flex flex-row space-x-4 px-2">   <i class="fas fa-user-circle m-2 custom-user-icon"></i>  <p class="font-bold text-xl mt-1">username</p></div>
+
+<img src=" alt="">
+    </div>
+    <div class="h-96 w-2/5 bg-gray-200 mt-9 ">
+
+    </div>
+    <div class="h-96 w-2/5 bg-gray-200 mt-9 ">
+
+    </div>
+
+
+
+
+
+
+
+  </div>
+  
 </body>
 </html>
+ 
