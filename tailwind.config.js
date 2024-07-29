@@ -3,10 +3,13 @@ module.exports = {
   content: ['./pages/**/*.html', // Adjust the path to match where your HTML files are located
     './pages/main.js',],
   theme: {
-    extend: {},
+    extend: {
+      
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('daisyui'),
   ],
 }
 
