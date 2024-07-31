@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/output.css">
+   
     <link href="../node_modules/daisyui/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <title>profil</title>
     <style>
-      
+      .overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            z-index: 10; /* Ensure it's behind the form but in front of the profile */
+        }
         .custom-user-icon {
             color: white; /* User color */
             background-color: orange; /* Circle color */
@@ -26,9 +35,33 @@
           position: sticky;
   top: 100px;
         }
+        .postshowup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 20;
+}
+
+#divpost {
+    background: white;
+    max-width: 500px; /* Adjust width as needed */
+    width: 90%; /* Responsive width */
+    padding: 2rem;
+    border-radius: 8px;
+    transform: translateY(7%);
+    height: 60%; /* Adjust the vertical offset */
+}
+
+
     </style>
 </head>
-<body class="bg-gray-100">
+<body id="body" class="bg-gray-100 ">
   <nav class="bg-gray-200 h-20 shadow-md py-4 fixed top-0 left-0 right-0 z-10">
     <div class="container mx-auto flex justify-between items-center px-6">
       <div class="flex space-x-8">
@@ -39,6 +72,7 @@
           <i class="fas fa-user"></i> Profile
         </a>
       </div>
+      
       <div class="flex flex-nowrap space-x-2">
         <div class="font-bold text-xl text-center mt-1">username</div>
         <button id="signin" type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mb-5">
@@ -47,7 +81,7 @@
       </div>
     </div>
   </nav>
-  
+  <div id="overlay" class="overlay"></div>
   <div class="flex flex-col md:flex-row justify-between mt-24 space-x-6">
     <div class="m-6 w-full md:w-1/4">
       <div class="card bg-gray-200 shadow-lg rounded-lg p-6  " data-aos="fade-up">
@@ -72,7 +106,53 @@
           </div>
         </div>
       </div>
-      <a href="#create-post" class="btn btn-primary m-5 hright ">Create New Post</a>
+      <ul class="menu bg-gray-200 lg:menu-horizontal rounded-box mt-7">
+        <li>
+          <a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Inbox
+            <span class="badge badge-sm">99+</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Updates
+            <span class="badge badge-sm badge-warning">NEW</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            Stats
+            <span class="badge badge-xs badge-info"></span>
+          </a>
+        </li>
+      </ul>
+      <a href="#create-post" class="btn btn-primary m-5 hright mt-4 " id="createpost">Create New Post</a>
+      <a href="#create-post" class="btn btn-primary m-5 hright mt-4" id="editprofil">Edit profil</a>
+      
     </div>
 
     <div class="flex-1 container flex flex-col items-center">
@@ -142,7 +222,62 @@
   <script>
     AOS.init();
   </script>
-  
+
+   <div id="divpost" class="max-w-lg mx-auto mt-8 p-6 bg-gray-100 shadow-md rounded-md postshowup hidden ">
+    <h2 class="text-2xl font-semibold mb-4">Create a New Post</h2>
+    <form id="new-post-form" action="/your-backend-endpoint" method="POST" enctype="multipart/form-data">
+      <div class="mb-4">
+        <label for="post-title" class="block text-sm font-medium text-gray-700">Title</label>
+        <input type="text" id="post-title" name="title" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+      </div>
+      <div class="mb-4">
+        <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
+        <textarea id="post-content" name="content" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="post-image" class="block text-sm font-medium text-gray-700">Image</label>
+        <input type="file" id="post-image" name="image" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+      </div>
+      <div class="flex justify-end">
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Post</button>
+      </div>
+    </form>
+    
+    <script>
+       // Show the form and overlay
+      document.getElementById('createpost').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('divpost').style.display = 'block';
+        });
+       
+
+        // Hide the form and overlay when clicking outside the form
+        this.addEventListener('click', function(event) {
+          if (event.target === document.getElementById('overlay')) {
+            document.getElementById('divpost').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+          }
+            
+
+           
+        });
+      
+        document.addEventListener('DOMContentLoaded', (event) => {
+    const editProfileButton = document.getElementById('editprofil');
+    if (editProfileButton) {
+        console.log('Edit Profile button found');
+        editProfileButton.addEventListener('click', () => {
+            console.log('Button clicked');
+            window.location = '/pages/modifyprofil.html';
+        });
+    } else {
+        console.log('Edit Profile button not found');
+    }
+});
+
+        </script>
+  </div>
+
 </body>
 </html>
 

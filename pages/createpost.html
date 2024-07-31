@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="../node_modules/daisyui/dist/full.css" rel="stylesheet">
-    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Post</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="flex justify-center items-center bg-white">
-    <div class="bg-gray-300 w-2/4 h-96 mt-20 rounded-md">
+<body class="bg-white">
 
+  <div class="max-w-lg mx-auto mt-8 p-6 bg-gray-200 shadow-md rounded-md">
+    <h2 class="text-2xl font-semibold mb-4">Create a New Post</h2>
+    <form id="new-post-form" action="/your-backend-endpoint" method="POST" enctype="multipart/form-data">
+      <div class="mb-4">
+        <label for="post-title" class="block text-sm font-medium text-gray-700">Title</label>
+        <input type="text" id="post-title" name="title" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+      </div>
+      <div class="mb-4">
+        <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
+        <textarea id="post-content" name="content" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="post-image" class="block text-sm font-medium text-gray-700">Image</label>
+        <input type="file" id="post-image" name="image" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+      </div>
+      <div class="flex justify-end">
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Post</button>
+      </div>
+    </form>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
 </body>
 </html>
