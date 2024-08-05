@@ -55,7 +55,16 @@ document.getElementById('divider').classList.add('errorstyle')
               // Store the authentication token in local storage
               const authtoken = response.data.token;
               window.localStorage.setItem('token', authtoken);
-
+             let userauth=response.data.user.username
+             window.localStorage.setItem('username', userauth);
+              let userid=response.data.user.id
+              window.localStorage.setItem('id', userid);
+              let fullname=response.data.user.name
+    window.localStorage.setItem('name',fullname)
+    let postnumber=response.data.user.posts_count
+    window.localStorage.setItem('postnumber',postnumber)
+    let commentnumber=response.data.user.comments_count
+    window.localStorage.setItem('commentnumber',commentnumber)
               // Call the loader function
               loader();
 

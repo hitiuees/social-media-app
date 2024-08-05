@@ -13,16 +13,25 @@ function register(event) {
       email: emailvalue,
       password: passvalue,
   };
-
+let baseurl='https://tarmeezacademy.com/api/v1'
   // Make the POST request to register the user
-  axios.post('https://tarmeezacademy.com/api/v1/register', bodydata)
+  axios.post(`${baseurl}/register`, bodydata)
       .then(response => {
           console.log(response.data.token);
 
-          // Store the authentication token in local storage
+          // Store the authentication token in local storage and user data
           const authtoken = response.data.token;
           window.localStorage.setItem('token', authtoken);
-
+         let userauth=response.data.user.username
+         window.localStorage.setItem('username', userauth);
+          let userid=response.data.user.id
+          window.localStorage.setItem('id', userid);
+          let fullname=response.data.user.name
+window.localStorage.setItem('name',fullname)
+let postnumber=response.data.userd.posts_count
+window.localStorage.setItem('postnumber',postnumber)
+let commentnumber=response.data.user.commments_count
+window.localStorage.setItem('commentnumber',commentnumber)
           // Call the loader function
           loader();
 

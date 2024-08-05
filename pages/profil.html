@@ -6,10 +6,14 @@
    
     <link href="../node_modules/daisyui/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <title>profil</title>
     <style>
+ .errorstyle{
+  display: none;
+ }
       .overlay {
             display: none; /* Hidden by default */
             position: fixed;
@@ -61,7 +65,7 @@
 
     </style>
 </head>
-<body id="body" class="bg-gray-100 ">
+<body  class="bg-gray-100 ">
   <nav class="bg-gray-200 h-20 shadow-md py-4 fixed top-0 left-0 right-0 z-10">
     <div class="container mx-auto flex justify-between items-center px-6">
       <div class="flex space-x-8">
@@ -74,7 +78,7 @@
       </div>
       
       <div class="flex flex-nowrap space-x-2">
-        <div class="font-bold text-xl text-center mt-1">username</div>
+        <div id="user" class="font-bold text-xl text-center mt-1">username</div>
         <button id="signin" type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mb-5">
           Log out
         </button>
@@ -82,26 +86,26 @@
     </div>
   </nav>
   <div id="overlay" class="overlay"></div>
-  <div class="flex flex-col md:flex-row justify-between mt-24 space-x-6">
-    <div class="m-6 w-full md:w-1/4">
+  <div class="flex flex-row   mt-24 space-x-20">
+    <div class="m-6 w-2/4">
       <div class="card bg-gray-200 shadow-lg rounded-lg p-6  " data-aos="fade-up">
         <div class="flex items-center space-x-4">
           <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-16 h-16 rounded-full">
           <div>
-            <h2 class="text-2xl font-semibold">Username</h2>
-            <p class="text-gray-500">@username_handle</p>
+            <h2 id="fullname" class="text-2xl font-semibold">Username</h2>
+            <p id="username" class="text-gray-500">@username_handle</p>
           </div>
         </div>
         <div class="mt-4">
           <div class="stat">
             <div class="stat-title">Posts</div>
-            <div class="stat-value">120</div>
+            <div id="postN" class="stat-value">120</div>
             <div class="stat-desc">21% more than last month</div>
           </div>
           <div class="divider"></div>
           <div class="stat">
             <div class="stat-title">Comments</div>
-            <div class="stat-value">350</div>
+            <div id="commentN"  class="stat-value">350</div>
             <div class="stat-desc">13% more than last month</div>
           </div>
         </div>
@@ -155,94 +159,35 @@
       
     </div>
 
-    <div class="flex-1 container flex flex-col items-center">
-      <div class="custom-height bg-gray-200 mt-9 space-y-1 rounded overflow-hidden shadow-lg" data-aos="fade-up">
-        <div class="flex flex-row space-x-4 px-2 mt-3">
-          <i class="fas fa-user-circle m-2 custom-user-icon"></i>
-          <p class="font-bold text-xl mt-1">username</p>
-        </div>
-        <div class="m-5 flex items-center justify-center mb-3">
-          <img src="sun-2643866_640.jpg" alt="Image">
-        </div>
-        <h6 class="m-3 text-gray-400">2 hours ago</h6>
-        <h3 class="font-bold ml-3">Hello world</h3>
-        <p class="m-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, quidem dolorum fuga earum velit expedita perspiciatis ratione minus doloribus cumque perferendis voluptas. Debitis sunt ratione suscipit, consectetur recusandae maiores necessitatibus!</p>
-        <hr class="border-t-2 border-gray-300 mt-2">
-        <div class="m-3">
-          <i class="fas fa-pencil-alt text-xl text-indigo-600 hover:text-indigo-950"></i>
-          <span>(3) comments</span>
-        </div>
-      </div>
-      
-      <div class="custom-height bg-gray-200 mt-9 space-y-1 rounded overflow-hidden shadow-lg" data-aos="fade-up">
-        <div class="flex flex-row space-x-4 px-2 mt-3">
-          <i class="fas fa-user-circle m-2 custom-user-icon"></i>
-          <p class="font-bold text-xl mt-1">username</p>
-        </div>
-        <div class="m-5 flex items-center justify-center mb-3">
-          <img src="sun-2643866_640.jpg" alt="Image">
-        </div>
-        <h6 class="m-3 text-gray-400">2 hours ago</h6>
-        <h3 class="font-bold ml-3">Hello world</h3>
-        <p class="m-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, quidem dolorum fuga earum velit expedita perspiciatis ratione minus doloribus cumque perferendis voluptas. Debitis sunt ratione suscipit, consectetur recusandae maiores necessitatibus!</p>
-        <hr class="border-t-2 border-gray-300 mt-2">
-        <div class="m-3">
-          <i class="fas fa-pencil-alt text-xl text-indigo-600 hover:text-indigo-950"></i>
-          <span>(3) comments</span>
-        </div>
-      </div>
-      
-      <div class="custom-height bg-gray-200 mt-9 space-y-1 rounded overflow-hidden shadow-lg" data-aos="fade-up">
-        <div class="flex flex-row space-x-4 px-2 mt-3">
-          <i class="fas fa-user-circle m-2 custom-user-icon"></i>
-          <p class="font-bold text-xl mt-1">username</p>
-        </div>
-        <div class="m-5 flex items-center justify-center mb-3">
-          <img src="sun-2643866_640.jpg" alt="Image">
-        </div>
-        <h6 class="m-3 text-gray-400">2 hours ago</h6>
-        <h3 class="font-bold ml-3">Hello world</h3>
-        <p class="m-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, quidem dolorum fuga earum velit expedita perspiciatis ratione minus doloribus cumque perferendis voluptas. Debitis sunt ratione suscipit, consectetur recusandae maiores necessitatibus!</p>
-        <hr class="border-t-2 border-gray-300 mt-2">
-        <div class="m-3">
-          <i class="fas fa-pencil-alt text-xl text-indigo-600 hover:text-indigo-950"></i>
-          <span>(3) comments</span>
-        </div>
-      </div>
-    </div>
+    <div id="postcontainer" class=" container flex flex-col ">
+     
   
   </div>
-  <div class="divider"></div>
-  <footer class="footer footer-center bg-base-300 text-base-content p-4">
-    <aside>
-      <p>Copyright © 2024 - All right reserved by <h2 class="text-indigo-700 font-semibold">chat-B</h2></p>
-    </aside>
-  </footer>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();
   </script>
 
    <div id="divpost" class="max-w-lg mx-auto mt-8 p-6 bg-gray-100 shadow-md rounded-md postshowup hidden ">
-    <h2 class="text-2xl font-semibold mb-4">Create a New Post</h2>
-    <form id="new-post-form" action="/your-backend-endpoint" method="POST" enctype="multipart/form-data">
+    <h2 id="titlegone" class="text-2xl font-semibold mb-4">Create a New Post</h2>
+    <form id="new-post-form"  >
       <div class="mb-4">
         <label for="post-title" class="block text-sm font-medium text-gray-700">Title</label>
         <input type="text" id="post-title" name="title" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
       </div>
       <div class="mb-4">
         <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
-        <textarea id="post-content" name="content" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+        <textarea id="post-content"  rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
       </div>
       <div class="mb-4">
         <label for="post-image" class="block text-sm font-medium text-gray-700">Image</label>
-        <input type="file" id="post-image" name="image" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+        <input type="file" id="post-image"  class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
       </div>
       <div class="flex justify-end">
-        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Post</button>
+        <button id="post" type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Post</button>
       </div>
     </form>
-    
+
     <script>
        // Show the form and overlay
       document.getElementById('createpost').addEventListener('click', function() {
@@ -256,12 +201,13 @@
           if (event.target === document.getElementById('overlay')) {
             document.getElementById('divpost').style.display = 'none';
             document.getElementById('overlay').style.display = 'none';
+            window.location.reload();
           }
             
-
+          
            
         });
-      
+     
         document.addEventListener('DOMContentLoaded', (event) => {
     const editProfileButton = document.getElementById('editprofil');
     if (editProfileButton) {
@@ -277,7 +223,8 @@
 
         </script>
   </div>
-
+<script src="profil.js"></script>
+<script  src="newpost.js"></script>
 </body>
 </html>
 
