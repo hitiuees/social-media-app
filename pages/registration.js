@@ -103,7 +103,7 @@ document.getElementById('signup').addEventListener('click', checkvalidity);
 // Function to display the loading screen before redirecting to the home page
 function loader() {
   // Get the user's full name from the input field
-  let fullname = document.querySelectorAll('input')[0].value;
+  
 
   // Modify the body's class to hide other content
   document.getElementById('body').classList.remove('flex');
