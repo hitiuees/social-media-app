@@ -21,6 +21,4 @@ rad.json
 #Test results file
 TestResults.xml
 # Node modules folder
-node_modules/
-#files of json
-*.json
+/node_modules
